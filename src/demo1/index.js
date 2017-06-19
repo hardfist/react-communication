@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+/** 父子组件通信  */
 class ListItem extends Component{
   handleClick(){
     const { handleItemClick } = this.props;
