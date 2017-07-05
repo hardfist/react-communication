@@ -1,0 +1,10 @@
+.demo{
+  width: 900px;
+  margin: 40px auto;
+  border: 1px solid red;
+  padding: 20px;
+}
+label{
+  display: block;
+  margin: 20px;
+}
