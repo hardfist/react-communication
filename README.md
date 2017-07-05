@@ -81,7 +81,7 @@ topbuzz的编辑器内部业务就较为复杂（涉及图片视频的上传，�
 
 
 
-相关代码见
+相关代码[react-communication](https://github.com/hardfist/react-communication)
 
 
 
