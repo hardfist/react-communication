@@ -1,13 +1,13 @@
-# React实践那些坑
+# React实践填坑记
 
 项目重构中碰到了很多组件通信带来的问题，对组件通信进行总结。
 
 react组件通信有几种常见的场景
 
-+ 父子组件通信(demo1)：父子组件通信最为简单，父组件向子组件传递props，子组件接受父组件的回调
-+ 跨级组件通信(demo2)：（使用Context，典型的是Redux)
-+ 兄弟组件通信(demo3) ：在父组件维护state，兄弟组件接受props，兄弟组件修改父组件state。redux way
-+ 全局事件通信(demo4)：全局事件需要保证派发事件时，监听者必须存在，否则可能会导致监听不到事件的发生，两种解决方式，double check，或者监听DomContentLoaded之后再进行事件派发，保证监听者已经存在。
++ 父子组件通信([Demo1](https://github.com/hardfist/react-communication/tree/master/src/demo1))：父子组件通信最为简单，父组件向子组件传递props，子组件接受父组件的回调
++ 跨级组件通信([Demo2](https://github.com/hardfist/react-communication/tree/master/src/demo2))：（使用Context，典型的是Redux)
++ 兄弟组件通信([Demo3](https://github.com/hardfist/react-communication/tree/master/src/demo3)) ：在父组件维护state，兄弟组件接受props，兄弟组件修改父组件state。redux way
++ 全局事件通信([Demo4](https://github.com/hardfist/react-communication/tree/master/src/demo3))：全局事件需要保证派发事件时，监听者必须存在，否则可能会导致监听不到事件的发生，两种解决方式，double check，或者监听DomContentLoaded之后再进行事件派发，保证监听者已经存在。
 
 以上是几种最基本的情形，但现实中还是可能存在种种问题。
 
@@ -37,7 +37,7 @@ react组件通信有几种常见的场景
 
 ### 数据更新
 
-render函数里渲染的数据可能分为四种(demo6)。
+render函数里渲染的数据可能分为四种([Demo6](https://github.com/hardfist/react-communication/tree/master/src/demo6))。
 
 + this.state
 + this.props.mutable
@@ -52,7 +52,7 @@ render函数里渲染的数据可能分为四种(demo6)。
 
 ## 非受控组件
 
-暂时我们进行如下定义(demo7)：
+暂时我们进行如下定义([Demo7](https://github.com/hardfist/react-communication/tree/master/src/demo7))：
 
 + 受控组件：组件的状态维护在组件外部，组件响应props的变化，并提供向外派发命令的接口。
 + 非受控组件：组件状态维护在组件内部，组件只根据config进行初始化，后续不响应props的变化，并提供向外的onChange接口。
@@ -72,12 +72,10 @@ topbuzz的编辑器内部业务就较为复杂（涉及图片视频的上传，�
 
 然而需求是不断变动的，产品后来提了给需求，需要编辑器支持重新载入新内容功能，这也就要求我们的编辑器能够重新根据新的config重新载入编辑器内容。
 
-存在下面两种方案
+存在下面两种方案([Demo8](https://github.com/hardfist/react-communication/tree/master/src/demo8))
 
 1. 编辑器向外提供重新载入接口loadFromConfig，外部需要重新载入时通过调用editorInstance.loadFromConfig(newConfig)即可。
 2. 编辑器在willReceiveProps中响应config里article的变化，重新初始化state。该方案存在的问题是父组件的render会触发willReceiveProps，造成错误的初始化state。根源在于此时编辑器的state即维护在内部，又受到外部影响，会造成内外状态不一致。
-
-代码实现见demo8
 
 
 
