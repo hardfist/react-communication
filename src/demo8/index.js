@@ -8,6 +8,19 @@ class RichEditor extends React.Component {
     super(props);
     this.state = this.config2state(props.config);
   }
+  // 只允许内部state变化触发render，禁止外部props变化触发更新以维护内部状态。
+  shouldComponentUpdate(nextProps, nextState) {
+    let update = false;
+    const { title: nextTitle, editorState: nextEditorState } = nextState;
+    const { title, editorState } = this.state;
+    if(title !== nextTitle) {
+      update = true;
+    }
+    if(editorState !== nextEditorState) {
+      update = true;
+    }
+    return update;
+  }
   componentWillReceiveProps(nextProps) {
     this.reloadFromConfig(nextProps.config);
   }
