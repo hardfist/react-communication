@@ -1,5 +1,7 @@
 # React实践填坑记
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/hardfist/react-communication.svg)](https://greenkeeper.io/)
+
 项目重构中碰到了很多组件通信带来的问题，对组件通信进行总结。
 
 react组件通信有几种常见的场景
